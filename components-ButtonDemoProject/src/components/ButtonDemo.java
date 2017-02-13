@@ -56,22 +56,22 @@ public class ButtonDemo extends JPanel
         ImageIcon middleButtonIcon = createImageIcon("images/middle.gif");
         ImageIcon rightButtonIcon = createImageIcon("images/left.gif");
 
-        b1 = new JButton("Desabilitar Esse Botão", leftButtonIcon);
+        b1 = new JButton("Desabilitar Botão do Meio", leftButtonIcon);
         b1.setVerticalTextPosition(AbstractButton.CENTER);
         b1.setHorizontalTextPosition(AbstractButton.LEADING); //aka LEFT, for left-to-right locales
         b1.setMnemonic(KeyEvent.VK_D);
-        b1.setActionCommand("disable");
+        b1.setActionCommand("b1");
 
-        b2 = new JButton("Botão Do Meio", middleButtonIcon);
+        b2 = new JButton("Habilitar/Desabilitar", middleButtonIcon);
         b2.setVerticalTextPosition(AbstractButton.BOTTOM);
         b2.setHorizontalTextPosition(AbstractButton.CENTER);
         b2.setMnemonic(KeyEvent.VK_M);
-        b2.setActionCommand("Jurema");
-
-        b3 = new JButton("Desabilitar Botão da Esquerda", rightButtonIcon);
+        b2.setActionCommand("b2");
+        
+        b3 = new JButton("Habilitar Botão do Meio", rightButtonIcon);
         //Use the default text position of CENTER, TRAILING (RIGHT).
         b3.setMnemonic(KeyEvent.VK_E);
-        b3.setActionCommand("enable");
+        b3.setActionCommand("b3");
         b3.setEnabled(true);
 
         //Listen for actions on buttons 1 and 3.
@@ -79,9 +79,9 @@ public class ButtonDemo extends JPanel
         b2.addActionListener(this);
         b3.addActionListener(this);
 
-        b1.setToolTipText("Clica aqui p desativar o botão direito.");
-        b2.setToolTipText("Clica aqui p ativar e desativar os dois KKKK");
-        b3.setToolTipText("Clica aqui p desativar o botão esquerdo.");
+        b1.setToolTipText("Clique neste botão para desativar o botão do meio.");
+        b2.setToolTipText("Clique neste botão para ativar e desativar os botões laterais.");
+        b3.setToolTipText("Clique neste botão para ativar o botão do meio.");
 
         //Add Components to this container, using the default FlowLayout.
         add(b1);
@@ -90,17 +90,29 @@ public class ButtonDemo extends JPanel
     }
 
     public void actionPerformed(ActionEvent e) {
-        if ("disable".equals(e.getActionCommand())) {
+        if ("b1".equals(e.getActionCommand())) {
+            b1.setEnabled(false);
+            b2.setEnabled(false);
+            b3.setEnabled(true);
+        }
+        
+        if ("b2".equals(e.getActionCommand())) {
+            if(b1.isEnabled()) {
             b1.setEnabled(false);
             b2.setEnabled(true);
-            b3.setEnabled(true);
-        }else {
-            b2.setEnabled(true);
             b3.setEnabled(false);
-        }if ("Jurema".equals(e.getActionCommand())){
+            }
+            else{
             b1.setEnabled(true);
             b2.setEnabled(true);
             b3.setEnabled(true);
+            }
+            
+        }
+         if ("b3".equals(e.getActionCommand())) {
+            b1.setEnabled(true);
+            b2.setEnabled(true);
+            b3.setEnabled(false);
         }
         
     }
