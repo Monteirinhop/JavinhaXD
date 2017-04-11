@@ -55,29 +55,36 @@ public class FormattedTextFieldDemo extends JPanel
     private double amount = 100000;
     private double rate = 7.5;  //7.5%
     private int numPeriods = 30;
+    
 
     //Labels to identify the fields
+    private JLabel vipLabel;
     private JLabel amountLabel;
     private JLabel rateLabel;
     private JLabel numPeriodsLabel;
     private JLabel paymentLabel;
+    private JLabel receberLabel;
 
     //Strings for the labels
-    private static String amountString = "Loan Amount: ";
-    private static String rateString = "APR (%): ";
-    private static String numPeriodsString = "Years: ";
-    private static String paymentString = "Monthly Payment: ";
+    private static String vipString = "User vip: ";
+    private static String amountString = "Montante: ";
+    private static String rateString = "Taxa(%): ";
+    private static String numPeriodsString = "Anos: ";
+    private static String paymentString = "Pagamento Mensal: ";
+    private static String receberString = "Pagamento VIP: ";
 
     //Fields for data entry
     private JFormattedTextField amountField;
     private JFormattedTextField rateField;
     private JFormattedTextField numPeriodsField;
     private JFormattedTextField paymentField;
+    private JFormattedTextField receberField;
 
     //Formats to format and parse numbers
     private NumberFormat amountFormat;
     private NumberFormat percentFormat;
     private NumberFormat paymentFormat;
+    private NumberFormat receberFormat;
 
     public FormattedTextFieldDemo() {
         super(new BorderLayout());
@@ -91,6 +98,8 @@ public class FormattedTextFieldDemo extends JPanel
         rateLabel = new JLabel(rateString);
         numPeriodsLabel = new JLabel(numPeriodsString);
         paymentLabel = new JLabel(paymentString);
+        receberLabel = new JLabel(receberString);
+        vipLabel = new JLabel(vipString);
 
         //Create the text fields and set them up.
         amountField = new JFormattedTextField(amountFormat);
@@ -113,26 +122,42 @@ public class FormattedTextFieldDemo extends JPanel
         paymentField.setColumns(10);
         paymentField.setEditable(false);
         paymentField.setForeground(Color.red);
-
+        
+        receberField = new JFormattedTextField(paymentFormat);
+        receberField.setValue(new Double(payment));
+        receberField.setColumns(10);
+        receberField.setEditable(false);
+        receberField.setForeground(Color.green);
+        
+        //checkbox
+        JCheckBox checkbox = new JCheckBox("");
+        if(checkbox.isSelected()){
+        receberField += %0.1;
+        }
         //Tell accessibility tools about label/textfield pairs.
         amountLabel.setLabelFor(amountField);
         rateLabel.setLabelFor(rateField);
         numPeriodsLabel.setLabelFor(numPeriodsField);
         paymentLabel.setLabelFor(paymentField);
-
+        receberLabel.setLabelFor(receberField);
+        
         //Lay out the labels in a panel.
         JPanel labelPane = new JPanel(new GridLayout(0,1));
+        labelPane.add(vipLabel);
         labelPane.add(amountLabel);
         labelPane.add(rateLabel);
         labelPane.add(numPeriodsLabel);
         labelPane.add(paymentLabel);
+        labelPane.add(receberLabel);
 
         //Layout the text fields in a panel.
         JPanel fieldPane = new JPanel(new GridLayout(0,1));
+        fieldPane.add(checkbox);
         fieldPane.add(amountField);
         fieldPane.add(rateField);
         fieldPane.add(numPeriodsField);
         fieldPane.add(paymentField);
+        fieldPane.add(receberField);
 
         //Put the panels in this panel, labels on left,
         //text fields on right.
@@ -154,6 +179,8 @@ public class FormattedTextFieldDemo extends JPanel
 
         double payment = computePayment(amount, rate, numPeriods);
         paymentField.setValue(new Double(payment));
+        
+        
     }
 
     /**

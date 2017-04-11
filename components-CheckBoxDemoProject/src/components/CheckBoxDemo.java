@@ -133,10 +133,7 @@ public class CheckBoxDemo extends JPanel
 
     protected void updatePicture() {
         //Get the icon corresponding to the image.
-        ImageIcon icon = createImageIcon(
-                                    "images/geek/geek-"
-                                    + choices.toString()
-                                    + ".gif");
+        ImageIcon icon = createImageIcon("dddd.gif");
         pictureLabel.setIcon(icon);
         pictureLabel.setToolTipText(choices.toString());
         if (icon == null) {
