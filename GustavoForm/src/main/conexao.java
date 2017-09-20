@@ -9,7 +9,7 @@ private Connection myConnection;
     Class.forName("com.mysql.jdbc.Driver");
   Class.forName("com.mysql.jdbc.Driver");
 myConnection = DriverManager.getConnection(
-"jdbc:mysql://localhost/sell","admin", "");
+"jdbc:mysql://localhost/sell","admin", "gadmin");
 }
     catch(Exception e){
     System.out.println("Falhou ao Fazer a conexão!");
